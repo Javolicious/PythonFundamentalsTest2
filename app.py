@@ -235,6 +235,36 @@ def mostrar_eda():
         st.markdown("""En esta sección se presentan las principales medidas estadísticas
         de las variables numéricas del dataset.
         """)
+        st.subheader("Detección Preliminar de Valores Extremos")
+
+        q1 = df[variable].quantile(0.25)
+        q3 = df[variable].quantile(0.75)
+
+        iqr = q3 - q1
+
+        limite_inferior = q1 - 1.5 * iqr
+        limite_superior = q3 + 1.5 * iqr
+
+        outliers = df[
+            (df[variable] < limite_inferior) |
+            (df[variable] > limite_superior)
+        ]
+
+        st.write(f"Valores extremos detectados: {len(outliers)}")
+
+        porcentaje = (
+            len(outliers) / len(df)
+        ) * 100
+
+        st.write(
+            f"Porcentaje de outliers: {porcentaje:.2f}%"
+        )
+
+    if len(outliers) > 0:
+        st.dataframe(
+            outliers[[variable]].head(20),
+            use_container_width=True
+        )
 
         estadisticas = analizador.obtener_estadisticas()
 
@@ -298,36 +328,7 @@ def mostrar_eda():
         )
 
     
-        st.subheader("Detección Preliminar de Valores Extremos")
-
-        q1 = df[variable].quantile(0.25)
-        q3 = df[variable].quantile(0.75)
-
-        iqr = q3 - q1
-
-        limite_inferior = q1 - 1.5 * iqr
-        limite_superior = q3 + 1.5 * iqr
-
-        outliers = df[
-            (df[variable] < limite_inferior) |
-            (df[variable] > limite_superior)
-        ]
-
-        st.write(f"Valores extremos detectados: {len(outliers)}")
-
-        porcentaje = (
-            len(outliers) / len(df)
-        ) * 100
-
-        st.write(
-            f"Porcentaje de outliers: {porcentaje:.2f}%"
-        )
-
-    if len(outliers) > 0:
-        st.dataframe(
-            outliers[[variable]].head(20),
-            use_container_width=True
-        )
+       
 
     
 
