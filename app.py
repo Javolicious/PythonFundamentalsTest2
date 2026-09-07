@@ -162,21 +162,21 @@ def mostrar_eda():
 
     with tabs[0]:
 
-    st.header("Ítem 1: Informaciónel Dataset")
+        st.header("Ítem 1: Informaciónel Dataset")
 
-    buffer = io.StringIO()
+        buffer = io.StringIO()
 
-    df.info(buf=buffer)
+        df.info(buf=buffer)
 
-    info_text = buffer.getvalue()
+        info_text = buffer.getvalue()
 
-    st.subheader("Información General")
-    st.text(info_text)
+        st.subheader("Información General")
+        st.text(info_text)
 
-    st.subheader("Valores Nulos")
+        st.subheader("Valores Nulos")
 
-    st.dataframe(
-        analizador.contar_nulos().reset_index().rename(
+        st.dataframe(
+            analizador.contar_nulos().reset_index().rename(
             columns={
                 "index": "Variable",
                 0: "Nulos"
@@ -184,11 +184,11 @@ def mostrar_eda():
         )
     )
 
-    st.subheader("Registros Duplicados")
+        st.subheader("Registros Duplicados")
 
-    st.write(
-        f"Cantidad de registros duplicados: "
-        f"{analizador.contar_duplicados()}"
+        st.write(
+            f"Cantidad de registros duplicados: "
+            f"{analizador.contar_duplicados()}"
     )
 
 # ==================================================
