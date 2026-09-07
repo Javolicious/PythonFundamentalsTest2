@@ -198,32 +198,32 @@ def mostrar_eda():
     # =======================================
 
     with tabs[1]:
-    st.header("Ítem 2: Clasificación de Variables")
+        st.header("Ítem 2: Clasificación de Variables")
 
-    variables_numericas = analizador.obtener_variables_numericas()
-    variables_categoricas = analizador.obtener_variables_categoricas()
+        variables_numericas = analizador.obtener_variables_numericas()
+        variables_categoricas = analizador.obtener_variables_categoricas()
 
-    col1, col2 = st.columns(2)
+        col1, col2 = st.columns(2)
 
-    with col1:
+        with col1:
 
-        st.subheader("Variables Numéricas")
+            st.subheader("Variables Numéricas")
 
-        st.metric(
+            st.metric(
             "Total",
             len(variables_numericas)
-        )
+            )
 
-        st.write(variables_numericas)
+            st.write(variables_numericas)
 
-    with col2:
+        with col2:
 
-        st.subheader("Variables Categóricas")
+            st.subheader("Variables Categóricas")
 
-        st.metric(
+            st.metric(
             "Total",
             len(variables_categoricas)
-        )
+            )
 
         st.write(variables_categoricas)
 
