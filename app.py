@@ -422,11 +422,11 @@ def mostrar_eda():
         st.header("Ítem 6: Análisis de Variables Categóricas")
 
         variables_categoricas = [
-        "position",
-        "team",
-        "match_result",
-        "tournament_stage",
-        "preferred_foot"
+        "posicion",
+        "equipo",
+        "resultado",
+        "ranking",
+        "pie preferido"
         ]
 
         categoria = st.selectbox("Seleccione una variable categórica",variables_categoricas)
