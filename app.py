@@ -162,32 +162,30 @@ def mostrar_eda():
 
     with tabs[0]:
 
-    st.header("Ítem 1: Información del Dataset")
+        st.header("Ítem 1: Información del Dataset")
 
-    st.header("Ítem 1: Información General del Dataset")
+        col1, col2, col3 = st.columns(3)
 
-    col1, col2, col3 = st.columns(3)
+        with col1:
+            st.metric("Filas", df.shape[0])
 
-    with col1:
-        st.metric("Filas", df.shape[0])
+        with col2:
+            st.metric("Columnas", df.shape[1])
 
-    with col2:
-        st.metric("Columnas", df.shape[1])
+        with col3:
+            st.metric(
+            "Duplicados",
+            analizador.contar_duplicados()
+        )
 
-    with col3:
-        st.metric(
-        "Duplicados",
-        analizador.contar_duplicados()
-    )
+    st.subheader("Tipos de Datos")
 
-st.subheader("Tipos de Datos")
-
-tipos_df = pd.DataFrame({
-    "Columna": df.columns,
-    "Tipo de Dato": df.dtypes.astype(str)
+    tipos_df = pd.DataFrame({
+        "Columna": df.columns,
+        "Tipo de Dato": df.dtypes.astype(str)
 })
 
-st.dataframe(tipos_df)
+    st.dataframe(tipos_df)
 
 # ==================================================
 # MENU
