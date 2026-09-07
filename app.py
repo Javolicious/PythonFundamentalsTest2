@@ -71,7 +71,7 @@ def mostrar_home():
 
 #MODULO 2 CARGA DATASET
 
-def cagarDataset():
+def cargarDataset():
     
     uploaded_file = st.file_uploader(
     "Seleccione el archivo CSV",
@@ -91,6 +91,7 @@ def cagarDataset():
         st.write(f"Columnas: {df.shape[1]}")
     else:
         st.warning("Por favor cargue un archivo CSV")
+        st.stop()
 
 
 
