@@ -184,14 +184,14 @@ def mostrar_eda():
         )
 
     
-            st.subheader("Tipos de Datos")
+        st.subheader("Tipos de Datos")
 
-            tipos_df = pd.DataFrame({
+        tipos_df = pd.DataFrame({
             "Columna": df.columns,
             "Tipo de Dato": df.dtypes.astype(str)
             })
 
-            st.dataframe(tipos_df)
+        st.dataframe(tipos_df)
 
 
     # =======================================
