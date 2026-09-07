@@ -393,6 +393,27 @@ def mostrar_eda():
         st.pyplot(fig)
         plt.close(fig)
 
+        st.subheader("Distribución por Posición")
+
+        posicion = st.selectbox("Seleccione una posición",sorted(df["position"].dropna().unique()))
+
+        df_filtrado = df[df["position"] == posicion]
+
+        fig2, ax2 = plt.subplots(figsize=(8, 5))
+
+        sns.histplot(
+            data=df_filtrado,
+            x=variable,
+            kde=True,
+            ax=ax2
+            )
+
+        ax2.set_title(
+            f"{variable} - Posición: {posicion}"
+            )
+
+        st.pyplot(fig2)
+
 # ==================================================
 # MENU
 # ==================================================
