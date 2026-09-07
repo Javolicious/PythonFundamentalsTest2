@@ -164,7 +164,7 @@ def mostrar_eda():
 
         st.header("Ítem 1: Información del Dataset")
 
-        col1, col2, col3, col4 = st.columns(4)
+        col1, col2, col3, col4, col5 = st.columns(5)
 
         with col1:
             st.metric("Filas", df.shape[0])
@@ -183,14 +183,15 @@ def mostrar_eda():
             analizador.contar_nulos()
         )
 
-    st.subheader("Tipos de Datos")
+        with col5:
+            st.subheader("Tipos de Datos")
 
-    tipos_df = pd.DataFrame({
-        "Columna": df.columns,
-        "Tipo de Dato": df.dtypes.astype(str)
-})
+            tipos_df = pd.DataFrame({
+            "Columna": df.columns,
+            "Tipo de Dato": df.dtypes.astype(str)
+            })
 
-    st.dataframe(tipos_df)
+            st.dataframe(tipos_df)
 
 
     # =======================================
