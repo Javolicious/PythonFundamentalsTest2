@@ -9,7 +9,6 @@ import io
 # ==================================================
 # MODULO 1 - HOME
 # ==================================================
-
 def mostrar_home():
 
     st.title("⚽ FIFA World Cup 2026 Player Performance Analysis")
