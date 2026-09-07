@@ -160,34 +160,36 @@ def mostrar_eda():
     # ITEM 1
     # =======================================
 
-    with tabsst.header("Ítem 1: Información General del Dataset"):
+    with tabs[0]:
 
-        buffer = io.StringIO()
+    st.header("Ítem 1: Informaciónel Dataset")
 
-        df.info(buf=buffer)
+    buffer = io.StringIO()
 
-        info_text = buffer.getvalue()
+    df.info(buf=buffer)
 
-        st.subheader("Información General")
-        st.text(info_text)
+    info_text = buffer.getvalue()
 
-        st.subheader("Valores Nulos")
+    st.subheader("Información General")
+    st.text(info_text)
 
-        st.dataframe(
-            analizador.contar_nulos().reset_index().rename(
-                columns={
-                    "index": "Variable",
-                    0: "Nulos"
-                }
-            )
+    st.subheader("Valores Nulos")
+
+    st.dataframe(
+        analizador.contar_nulos().reset_index().rename(
+            columns={
+                "index": "Variable",
+                0: "Nulos"
+            }
         )
+    )
 
-        st.subheader("Registros Duplicados")
+    st.subheader("Registros Duplicados")
 
-        st.write(
-            f"Cantidad de registros duplicados: "
-            f"{analizador.contar_duplicados()}"
-        )
+    st.write(
+        f"Cantidad de registros duplicados: "
+        f"{analizador.contar_duplicados()}"
+    )
 
 # ==================================================
 # MENU
