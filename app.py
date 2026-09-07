@@ -340,12 +340,13 @@ def mostrar_eda():
             "Porcentaje (%)": round((df.isnull().sum() / len(df)) * 100,2)
     })
 
-        st.subheader("Resumen de Valores Faltantes")
+        st.subheader("Resumen de Valores Nulos")
 
         st.dataframe(
-        nulos_df.sort_values(
+            nulos_df.sort_values(
             by="Valores Nulos",
-            ascending=False
+            ascending=False,
+            hide_index=True,
             )
      )
 
