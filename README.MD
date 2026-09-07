@@ -9,5 +9,6 @@ Los resultados obtenidos permiten comprender mejor el comportamiento de los juga
 
 
 
-
+https://pythonfundamentalstest2-gxtngmyg8xhyl8wy5bpfnw.streamlit.app/
+https://github.com/Javolicious/PythonFundamentalsTest2/
 
