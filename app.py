@@ -363,31 +363,35 @@ def mostrar_eda():
 
         st.header("Ítem 5: Distribución de Variables Numéricas")
 
-        analizar = [
+        variables_analizar = [
         "player_rating",
         "performance_score",
         "pass_accuracy",
         "distance_covered_km",
         "top_speed_kmh"
-        ]
+    ]
 
         variable = st.selectbox(
-        "Seleccione una variable",
-        variables_analizar
-        )
+            "Seleccione una variable",
+            options=variables_analizar,
+            key="variable_distribucion"
+            )
 
         fig, ax = plt.subplots(figsize=(8, 5))
 
         sns.histplot(
-        data=df,
-        x=variable,
-        kde=True,
-        ax=ax
-        )
+            data=df,
+            x=variable,
+            kde=True,
+            ax=ax
+            )
 
         ax.set_title(f"Distribución de {variable}")
+        ax.set_xlabel(variable)
+        ax.set_ylabel("Frecuencia")
 
         st.pyplot(fig)
+        plt.close(fig)
 
 # ==================================================
 # MENU
