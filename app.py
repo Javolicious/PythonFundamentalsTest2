@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import io
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # ==================================================
 # MODULO 1 - HOME
@@ -352,8 +354,34 @@ def mostrar_eda():
      )
 
 
-    
 
+    # =======================================
+    # ITEM 5
+    # =======================================#
+
+    with tabs[4]:
+
+        st.header("Ítem 5: Distribución de Variables Numéricas")
+
+       _analizar = [
+            "player_rating",
+            "performance_score",
+            "pass_accuracy",
+            "distance_covered_km",
+            "top_speed_kmh"
+        ]
+        variable = st.selectbox("Seleccione una variable",variables_analizar)
+
+        fig, ax = plt.subplots(figsize=(8,5))
+        sns.histplot(
+            data=df,
+            x=variable,
+            kde=True,
+            ax=ax
+        )
+
+        ax.set_title(f"Distribución de {variable}")
+        st.pyplot(fig)
 
 # ==================================================
 # MENU
