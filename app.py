@@ -357,7 +357,7 @@ def mostrar_eda():
 
     # =======================================
     # ITEM 5
-    # =======================================#
+    # =======================================
 
     with tabs[4]:
 
@@ -413,6 +413,78 @@ def mostrar_eda():
             )
 
         st.pyplot(fig2)
+
+    # =======================================
+    # ITEM 6
+    # =======================================
+    with tabs[5]:
+
+        st.header("Ítem 6: Análisis de Variables Categóricas")
+
+        variables_categoricas = [
+        "position",
+        "team",
+        "match_result",
+        "tournament_stage",
+        "preferred_foot"
+        ]
+
+        categoria = st.selectbox("Seleccione una variable categórica",variables_categoricas)
+
+        st.subheader("Conteo por Categoría")
+
+        conteo = df[categoria].value_counts()
+
+        st.dataframe(
+            conteo.reset_index().rename(
+            columns={
+                "index": categoria,
+                categoria: "Cantidad"
+                }
+            ),
+            hide_index=True
+            )
+
+        st.subheader("Gráfico de Barras")
+
+        fig, ax = plt.subplots(figsize=(8, 5))
+
+        sns.countplot(
+            data=df,
+            x=categoria,
+            order=conteo.index,
+            ax=ax
+        )
+
+        plt.xticks(rotation=45)
+
+        st.pyplot(fig)
+
+        st.subheader("Proporciones")
+
+        proporciones = (
+            df[categoria]
+            .value_counts(normalize=True)
+            .mul(100)
+            .round(2)
+        )
+
+    st.dataframe(
+        proporciones.reset_index().rename(
+            columns={
+                "index": categoria,
+                categoria: "Porcentaje (%)"
+            }
+        ),
+        hide_index=True
+        )
+
+    st.info(
+        f"El análisis de '{categoria}' permite identificar "
+        "las categorías más frecuentes y su representación "
+        "dentro del torneo."
+    )
+    
 
 # ==================================================
 # MENU
