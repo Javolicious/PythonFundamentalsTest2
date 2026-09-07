@@ -160,7 +160,7 @@ def mostrar_eda():
     # ITEM 1
     # =======================================
 
-    with tabsst.header("Ítem 1: Información General del Dataset")
+    with tabsst.header("Ítem 1: Información General del Dataset"):
 
         buffer = io.StringIO()
 
