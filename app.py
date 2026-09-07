@@ -69,9 +69,9 @@ def mostrar_home():
     )
     
 
+#MODULO 2 CARGA DATASET
 
-
-def cagarDataset()
+def cagarDataset():
     
 uploaded_file = st.file_uploader(
 "Seleccione el archivo CSV",
@@ -93,7 +93,21 @@ else:
     st.warning("Por favor cargue un archivo CSV")
 
 
-#MENU
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#MENU------------------------------------------------------------
 menu = st.sidebar.selectbox(
     "Seleccione un módulo",
     ["Home", "Carga del Dataset", "EDA"]
