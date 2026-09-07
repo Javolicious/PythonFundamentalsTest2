@@ -212,4 +212,4 @@ elif menu == "Carga del Dataset":
 
 elif menu == "EDA":
     mostrar_eda()
-`
+
