@@ -1,11 +1,14 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import io
 
+# ==================================================
+# MODULO 1 - HOME
+# ==================================================
 
-
-#Modulo 1 Presentación
 def mostrar_home():
+
     st.title("⚽ FIFA World Cup 2026 Player Performance Analysis")
 
     st.markdown("""
@@ -38,11 +41,11 @@ def mostrar_home():
     Incluye variables relacionadas con:
 
     - Datos personales del jugador
-    - Información de los partidos
+    - Información de partidos
     - Métricas ofensivas
     - Métricas defensivas
     - Rendimiento físico
-    - Calificaciones y desempeño general
+    - Calificaciones generales
     - Estadísticas acumuladas del torneo
     """)
 
@@ -65,36 +68,46 @@ def mostrar_home():
     st.markdown("---")
 
     st.info(
-        "Utilice el menú lateral para navegar entre los diferentes módulos del análisis."
+        "Utilice el menú lateral para navegar entre los módulos de la aplicación."
     )
-    
 
-#MODULO 2 CARGA DATASET
+# ==================================================
+# MODULO 2 - CARGA DATASET
+# ==================================================
 
-def cargarDataset():
-    
+def cargar_dataset():
+
+    st.header("📂 Carga del Dataset")
+
     uploaded_file = st.file_uploader(
-    "Seleccione el archivo CSV",
-    type=["csv"]
+        "Seleccione el archivo CSV",
+        type=["csv"]
     )
 
     if uploaded_file is not None:
+
         df = pd.read_csv(uploaded_file)
 
-        st.success("Archivo cargado correctamente")
+        st.success("✅ Archivo cargado correctamente")
 
-        st.subheader("Vista del dataset")
+        st.subheader("Vista previa del dataset")
         st.dataframe(df.head())
 
-        st.subheader("Dimensiones")
-        st.write(f"Filas: {df.shape[0]}")
-        st.write(f"Columnas: {df.shape[1]}")
-    else:
-        st.warning("Por favor cargue un archivo CSV")
-        st.stop()
+        col1, col2 = st.columns(2)
 
+        with col1:
+            st.metric("Filas", df.shape[0])
 
+        with col2:
+            st.metric("Columnas", df.shape[1])
 
+        return df
+
+    return None
+
+# ==================================================
+# POO
+# ==================================================
 
 class DataAnalyzer:
 
@@ -102,10 +115,10 @@ class DataAnalyzer:
         self.df = df
 
     def obtener_variables_numericas(self):
-        return self.df.select_dtypes(include=['number']).columns.tolist()
+        return self.df.select_dtypes(include=["number"]).columns.tolist()
 
     def obtener_variables_categoricas(self):
-        return self.df.select_dtypes(exclude=['number']).columns.tolist()
+        return self.df.select_dtypes(exclude=["number"]).columns.tolist()
 
     def obtener_estadisticas(self):
         return self.df.describe()
@@ -116,45 +129,87 @@ class DataAnalyzer:
     def contar_duplicados(self):
         return self.df.duplicated().sum()
 
-df = cargarDataset()
-analizador = DataAnalyzer(df)
+# ==================================================
+# MODULO EDA
+# ==================================================
 
-tabs = st.tabs([
-    "Ítem 1",
-    "Ítem 2",
-    "Ítem 3",
-    "Ítem 4",
-    "Ítem 5",
-    "Ítem 6",
-    "Ítem 7",
-    "Ítem 8",
-    "Ítem 9",
-    "Ítem 10"
-])
+def mostrar_eda():
 
-with tabs[0]:
-    import io
+    df = cargar_dataset()
 
-    buffer = io.StringIO()
+    if df is None:
+        st.warning("Debe cargar un archivo CSV para continuar.")
+        return
 
-    df.info(buf=buffer)
+    analizador = DataAnalyzer(df)
 
-    info_text = buffer.getvalue()
+    tabs = st.tabs([
+        "Ítem 1",
+        "Ítem 2",
+        "Ítem 3",
+        "Ítem 4",
+        "Ítem 5",
+        "Ítem 6",
+        "Ítem 7",
+        "Ítem 8",
+        "Ítem 9",
+        "Ítem 10"
+    ])
 
-    st.subheader("Información del Dataset")
+    # =======================================
+    # ITEM 1
+    # =======================================
 
-    st.text(info_text)
+    with tabsst.header("Ítem 1: Información General del Dataset")
 
+        buffer = io.StringIO()
 
+        df.info(buf=buffer)
 
+        info_text = buffer.getvalue()
 
-#MENU------------------------------------------------------------
+        st.subheader("Información General")
+        st.text(info_text)
+
+        st.subheader("Valores Nulos")
+
+        st.dataframe(
+            analizador.contar_nulos().reset_index().rename(
+                columns={
+                    "index": "Variable",
+                    0: "Nulos"
+                }
+            )
+        )
+
+        st.subheader("Registros Duplicados")
+
+        st.write(
+            f"Cantidad de registros duplicados: "
+            f"{analizador.contar_duplicados()}"
+        )
+
+# ==================================================
+# MENU
+# ==================================================
+
+st.sidebar.title("⚽ FIFA World Cup 2026")
+
 menu = st.sidebar.selectbox(
     "Seleccione un módulo",
-    ["Home", "Carga del Dataset", "EDA"]
+    [
+        "Home",
+        "Carga del Dataset",
+        "EDA"
+    ]
 )
 
 if menu == "Home":
     mostrar_home()
+
 elif menu == "Carga del Dataset":
-    cargarDataset()
+    cargar_dataset()
+
+elif menu == "EDA":
+    mostrar_eda()
+`
