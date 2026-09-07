@@ -163,6 +163,14 @@ def mostrar_eda():
     with tabs[0]:
 
         st.header("Ítem 1: Información del Dataset")
+        st.subheader("Tipos de Datos")
+
+        tipos_df = pd.DataFrame({
+            "Columna": df.columns,
+            "Tipo de Dato": df.dtypes.astype(str)
+            })
+
+        st.dataframe(tipos_df)
 
         col1, col2, col3, col4 = st.columns(4)
 
