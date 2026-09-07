@@ -133,17 +133,17 @@ tabs = st.tabs([
 ])
 
 with tabs[0]:
-import io
+    import io
 
-buffer = io.StringIO()
+    buffer = io.StringIO()
 
-df.info(buf=buffer)
+    df.info(buf=buffer)
 
-info_text = buffer.getvalue()
+    info_text = buffer.getvalue()
 
-st.subheader("Información del Dataset")
+    st.subheader("Información del Dataset")
 
-st.text(info_text)
+    st.text(info_text)
 
 
 
