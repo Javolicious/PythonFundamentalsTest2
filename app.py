@@ -347,9 +347,8 @@ def mostrar_eda():
             nulos_df.sort_values(
             by="Valores Nulos",
             ascending=False
-           
-            )
-            hide_index=True
+            ),
+        hide_index=True
      )
 
 
