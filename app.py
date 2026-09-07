@@ -124,7 +124,7 @@ class DataAnalyzer:
         return self.df.describe()
 
     def contar_nulos(self):
-        return self.df.isnull().sum()
+        return self.df.isnull().sum().sum()
 
     def contar_duplicados(self):
         return self.df.duplicated().sum()
