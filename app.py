@@ -227,7 +227,7 @@ def mostrar_eda():
 
         #st.write(variables_categoricas)#
 
-        st.info(f"El dataset contiene {len(variables_numericas)} variables numéricas "f"y {len(variables_categoricas)} variables categóricas.")
+        #st.info(f"El dataset contiene {len(variables_numericas)} variables numéricas "f"y {len(variables_categoricas)} variables categóricas.")#
 
 
 # ==================================================
