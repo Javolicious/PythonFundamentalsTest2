@@ -336,7 +336,7 @@ def mostrar_eda():
         st.header("Ítem 4: Análisis de Valores Faltantes")
         nulos_df = pd.DataFrame({
             "Columna": df.columns,
-             hide_index=True,
+            
             "Valores Nulos": df.isnull().sum(),
             "Porcentaje (%)": round((df.isnull().sum() / len(df)) * 100,2)
     })
@@ -349,6 +349,7 @@ def mostrar_eda():
             ascending=False
            
             )
+            hide_index=True
      )
 
 
