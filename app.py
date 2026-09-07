@@ -191,15 +191,6 @@ def mostrar_eda():
             analizador.contar_nulos()
         )
 
-    
-        st.subheader("Tipos de Datos")
-
-        tipos_df = pd.DataFrame({
-            "Columna": df.columns,
-            "Tipo de Dato": df.dtypes.astype(str)
-            })
-
-        st.dataframe(tipos_df)
 
 
     # =======================================
