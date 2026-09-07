@@ -199,7 +199,6 @@ menu = st.sidebar.selectbox(
     "Seleccione un módulo",
     [
         "Home",
-        "Carga del Dataset",
         "EDA"
     ]
 )
@@ -207,8 +206,6 @@ menu = st.sidebar.selectbox(
 if menu == "Home":
     mostrar_home()
 
-elif menu == "Carga del Dataset":
-    cargar_dataset()
 
 elif menu == "EDA":
     mostrar_eda()
