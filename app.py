@@ -224,6 +224,111 @@ def mostrar_eda():
             len(variables_categoricas)
             )
 
+    # =======================================
+    # ITEM 3
+    # =======================================
+    
+    with tabs[2]:
+
+        st.header("Ítem 3: Estadísticas Descriptivas")
+
+        st.markdown("""En esta sección se presentan las principales medidas estadísticas
+        de las variables numéricas del dataset.
+        """)
+
+        estadisticas = analizador.obtener_estadisticas()
+
+        st.subheader("Resumen Estadístico")
+
+        st.dataframe(
+            estadisticas,
+            use_container_width=True
+        )
+
+        st.subheader("Seleccionar Variable")
+
+        variable = st.selectbox(
+        "Seleccione una variable numérica",
+        analizador.obtener_variables_numericas()
+        )
+
+        col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        st.metric(
+            "Media",
+            round(df[variable].mean(), 2)
+        )
+
+    with col2:
+        st.metric(
+            "Mediana",
+            round(df[variable].median(), 2)
+        )
+
+    with col3:
+        st.metric(
+            "Mínimo",
+            round(df[variable].min(), 2)
+        )
+
+    with col4:
+        st.metric(
+            "Máximo",
+            round(df[variable].max(), 2)
+        )
+
+    st.subheader("Dispersión")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.metric(
+            "Desv. Estándar",
+            round(df[variable].std(), 2)
+        )
+
+    with col2:
+        st.metric(
+            "Rango",
+            round(
+                df[variable].max() - df[variable].min(),
+                2
+            )
+        )
+
+    st.subheader("Detección Preliminar de Valores Extremos")
+
+    q1 = df[variable].quantile(0.25)
+    q3 = df[variable].quantile(0.75)
+
+    iqr = q3 - q1
+
+    limite_inferior = q1 - 1.5 * iqr
+    limite_superior = q3 + 1.5 * iqr
+
+    outliers = df[
+        (df[variable] < limite_inferior) |
+        (df[variable] > limite_superior)
+    ]
+
+    st.write(
+        f"Valores extremos detectados: {len(outliers)}"
+    )
+
+    porcentaje = (
+        len(outliers) / len(df)
+    ) * 100
+
+    st.write(
+        f"Porcentaje de outliers: {porcentaje:.2f}%"
+    )
+
+    if len(outliers) > 0:
+        st.dataframe(
+            outliers[[variable]].head(20),
+            use_container_width=True
+        )
 
 
 # ==================================================
