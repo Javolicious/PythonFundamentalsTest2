@@ -164,7 +164,7 @@ def mostrar_eda():
 
         st.header("Ítem 1: Información del Dataset")
 
-        col1, col2, col3 = st.columns(3)
+        col1, col2, col3, col4 = st.columns(4)
 
         with col1:
             st.metric("Filas", df.shape[0])
@@ -176,6 +176,11 @@ def mostrar_eda():
             st.metric(
             "Duplicados",
             analizador.contar_duplicados()
+        )
+        with col4:
+            st.metric(
+            "Valores Nulos",
+            analizador.contar_nulos()
         )
 
     st.subheader("Tipos de Datos")
