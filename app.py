@@ -96,14 +96,54 @@ def cargarDataset():
 
 
 
+class DataAnalyzer:
 
+    def __init__(self, df):
+        self.df = df
 
+    def obtener_variables_numericas(self):
+        return self.df.select_dtypes(include=['number']).columns.tolist()
 
+    def obtener_variables_categoricas(self):
+        return self.df.select_dtypes(exclude=['number']).columns.tolist()
 
+    def obtener_estadisticas(self):
+        return self.df.describe()
 
+    def contar_nulos(self):
+        return self.df.isnull().sum()
 
+    def contar_duplicados(self):
+        return self.df.duplicated().sum()
 
+df = cargarDataset()
+analizador = DataAnalyzer(df)
 
+tabs = st.tabs([
+    "Ítem 1",
+    "Ítem 2",
+    "Ítem 3",
+    "Ítem 4",
+    "Ítem 5",
+    "Ítem 6",
+    "Ítem 7",
+    "Ítem 8",
+    "Ítem 9",
+    "Ítem 10"
+])
+
+with tabs[0]:
+import io
+
+buffer = io.StringIO()
+
+df.info(buf=buffer)
+
+info_text = buffer.getvalue()
+
+st.subheader("Información del Dataset")
+
+st.text(info_text)
 
 
 
