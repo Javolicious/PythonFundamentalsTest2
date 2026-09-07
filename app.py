@@ -115,5 +115,5 @@ menu = st.sidebar.selectbox(
 
 if menu == "Home":
     mostrar_home()
-elif menu == "Carga del Dataset"
+elif menu == "Carga del Dataset":
     cargarDataset()
