@@ -333,13 +333,11 @@ def mostrar_eda():
 
     with tabs[3]:
 
-        st.header("Ítem 4: Análisis de Valores Faltanteslos_df = pd.DataFrame({
-        "Columna": df.columns,
-        "Valores Nulos": df.isnull().sum(),
-        "Porcentaje (%)": round(
-            (df.isnull().sum() / len(df)) * 100,
-            2
-        )
+        st.header("Ítem 4: Análisis de Valores Faltantes")
+        nulos_df = pd.DataFrame({
+            "Columna": df.columns,
+            "Valores Nulos": df.isnull().sum(),
+            "Porcentaje (%)": round((df.isnull().sum() / len(df)) * 100,2)
     })
 
         st.subheader("Resumen de Valores Faltantes")
